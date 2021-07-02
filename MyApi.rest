@@ -1,0 +1,2 @@
+GET http://localhost:3000/request/photos
+Content-Type: application/json

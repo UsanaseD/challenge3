@@ -1,13 +1,24 @@
-const request = require('request');
+import request  from 'request';
 
-_EXTERNAL_URL = 'https://jsonplaceholder.typicode.com/albums/1/photos';
 
-const callExtrenalApiUsingRequest = (callback) => {
-    request(_EXTERNAL_URL, { json: true }, (err, res, body) => {
-        if (err) {
-            return callback(err);
+export default class Request{
+
+  static async callExtrenalApiUsingRequest  (req,res) {
+        try {
+      await request.get(`https://jsonplaceholder.typicode.com/albums/${req.params.id}/photos`,
+                { json: true }, (err,  body) => {
+                    if (err) {
+                        return res(err);
+                    }
+                    return res.status(200).json({
+                        data: body
+                    })
+        })
         }
-        return callback(body)
-    })
+    catch (error){
+ console.log(error)
 }
-module.exports.callApi = callExtrenalApiUsingRequest;
+
+}
+    
+}
